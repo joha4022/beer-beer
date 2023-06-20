@@ -1,29 +1,34 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from './App';
 
 export default function Homepage() {
-    const [ currentLoc, setCurrentLoc ] = useState({
-        lat: '',
-        long: ''
-    });
+  const { breweryList, setBreweryList, currentLoc, setCurrentLoc } = useContext(AppContext);
+  const navigate = useNavigate();
 
-    const grabLocation = () => {
-        if('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(position => {
-                setCurrentLoc({
-                    lat: `${position.coords.latitude}`, 
-                    long: `${position.coords.longitude}`
-                })
-                console.log(currentLoc);
-            })} else {
-            alert('please enable geolcation on your chrome');
-        }
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(position => {
+        setCurrentLoc({
+          lat: `${position.coords.latitude}`,
+          long: `${position.coords.longitude}`
+        })
+      })
+
+    } else {
+      alert('please enable geolcation on your chrome');
     }
+  }, [])
 
+  if (currentLoc) {
     return (
-        <>
-            <h1>Looking for breweries?</h1>
-            <h3>Explore Beer Beer!</h3>
-            <button onClick={() => {grabLocation()}}>Find local breweries</button>
-        </>
+      <>
+        <h1>Looking for breweries?</h1>
+        <h3>Explore Beer Beer!</h3>
+        <button onClick={() => {
+          navigate('/local-breweries');
+        }}>Find local breweries</button>
+      </>
     )
+  }
 }
