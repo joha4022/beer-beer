@@ -15,6 +15,7 @@ export default function App() {
   const [ breweryList, setBreweryList ] = useState(false);
   const [ currentLoc, setCurrentLoc ] = useState(false);
   const [ brewery, setBrewery ] = useState(false);
+  const [ searchQuery, setSearchQuery ] = useState(false);
 
   return (
     <AppContext.Provider value={ { 
@@ -23,7 +24,9 @@ export default function App() {
       currentLoc,
       setCurrentLoc,
       brewery,
-      setBrewery
+      setBrewery,
+      searchQuery,
+      setSerachQuery
       } }>
       <Router >
         <div className='main'>
