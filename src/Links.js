@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { AppContext } from './App';
 
 export default function Links() {
+  const { searchQuery, setSearchQuery } = useContext(AppContext);
+  
   const openForm = () => {
     if(document.querySelector('.search-form').style.display === 'block') {
       document.querySelector('.search-form').style.display = 'none';
@@ -29,7 +32,7 @@ export default function Links() {
           <input type='text' id='searchBox' placeholder='Search...'/>
           <input type='button' id='searchButton' value='Search'/>
         </form> */}
-        <input className='search-input' placeholder='Search...'/>
+        <input className='search-input' placeholder='Search...' onChange={(e)=>{setSearchQuery(e.target.value)}}/>
         <button className='search-button'>Search</Button>
 
       </div>
