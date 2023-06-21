@@ -6,7 +6,8 @@ import MicroBreweries from './MicroBreweries';
 import LargeBreweries from './LargeBreweries';
 import BrewPubs from './BrewPubs';
 import LocalBreweries from './LocalBreweries';
-import BreweryDetail from './BreweryDetail.js';
+import BreweryDetail from './BreweryDetail';
+import Breweries from './Breweries';
 import './App.css';
 
 export const AppContext = createContext();
@@ -37,6 +38,7 @@ export default function App() {
         </div>
         <Routes>
           <Route path='/' element={<Homepage />} />
+          <Route path='/breweries' element={<Breweries />} />
           <Route path='/micro-breweries' element={<MicroBreweries />} />
           <Route path='/large-breweries' element={<LargeBreweries />} />
           <Route path='/brewpub' element={<BrewPubs />} />
