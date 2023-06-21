@@ -22,7 +22,6 @@ export default function LocalBreweries() {
     fetch(`https://api.openbrewerydb.org/v1/breweries?by_dist=${currentLoc.lat},${currentLoc.long}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setBreweryList(data);
       })
   },[currentLoc])
@@ -39,13 +38,16 @@ export default function LocalBreweries() {
                 }}>
                 <h3>{b.name}</h3>
                 <div>
-                  <Category>Address: </Category><span>{b.street}, {b.city}, {b.state_province} {b.postal_code}</span>
+                  <Category>Address</Category>
+                  <span>{b.street}, {b.city}, {b.state_province} {b.postal_code}</span>
                 </div>
                 <div>
-                  <Category>Phone: </Category><span>{b.phone}</span>
+                  <Category>Phone Number</Category>
+                  <span>{b.phone}</span>
                 </div>
                 <div>
-                  <Category>Brewery Type: </Category><span>{b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}</span>
+                  <Category>Brewery Type</Category>
+                  {`${b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}` === 'Closed' ? <Category theme='red' boldness='normal'>{b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}</Category> : <span>{b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}</span>}
                 </div>
               </BreweryBox>
             )

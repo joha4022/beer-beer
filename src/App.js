@@ -26,9 +26,11 @@ export default function App() {
       setBrewery
       } }>
       <Router >
-        <h1>Beer Beer</h1>
-        <div className='link-bar'>
-          <Links />
+        <div className='main'>
+          <a className='title' href='http://localhost:3000/'><h1>Beer Beer</h1><img className='title-img' src='./images/beer.png'></img></a>
+          <div className='link-bar'>
+            <Links />
+          </div>
         </div>
         <Routes>
           <Route path='/' element={<Homepage />} />

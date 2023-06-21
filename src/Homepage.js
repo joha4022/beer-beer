@@ -1,6 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from './App';
+import { Megah1, Megah3 } from './Styled';
 
 export default function Homepage() {
   const { breweryList, setBreweryList, currentLoc, setCurrentLoc } = useContext(AppContext);
@@ -20,15 +21,13 @@ export default function Homepage() {
     }
   }, [])
 
-  if (currentLoc) {
-    return (
-      <>
-        <h1>Looking for breweries?</h1>
-        <h3>Explore Beer Beer!</h3>
-        <button onClick={() => {
-          navigate('/local-breweries');
-        }}>Find local breweries</button>
-      </>
-    )
-  }
+  if (currentLoc) return (
+    <div className='homepage'>
+      <Megah1>Looking for breweries?</Megah1>
+      <Megah3>Welcome to Beer Beer!</Megah3>
+      <button onClick={() => {
+        navigate('/local-breweries');
+      }}>Find your local breweries</button>
+    </div>
+  );
 }
