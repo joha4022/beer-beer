@@ -19,7 +19,7 @@ export default function Links() {
         <Link className='navigation-link' to='/brewpub'>Brew Pubs</Link>
       </div>
       <div className='search-container'>
-        {/* <button className='open-form-button' onClick={() => {openForm()}}>Advanced Search</button>
+        {/* <button className='open-form-button' onClick={() => {openForm()}}>Filtered Search</button>
         <form className='search-form'>
           <p>Search By:</p>
           <input type='radio' id='city' name='searchQuery' /><label>City</label>
@@ -29,6 +29,8 @@ export default function Links() {
           <input type='text' id='searchBox' placeholder='Search...'/>
           <input type='button' id='searchButton' value='Search'/>
         </form> */}
+        <input className='search-input' placeholder='Search...'/>
+        <button className='search-button'>Search</Button>
 
       </div>
     </>
