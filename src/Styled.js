@@ -9,7 +9,8 @@ const Category = styled.div`
 const OfficialLink = styled.a`
   text-decoration: none;
   color: #1D8698;
-  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
   &:hover {
     cursor: pointer;
@@ -35,10 +36,29 @@ const BreweryBox = styled.div`
 
 const Megah1 = styled.h1`
   font-size: 100px;
+  text-align: center;
 `
 
 const Megah3 = styled.h3`
+  margin-top: 0px;
   font-size: 50px;
+  text-align: center;
+`
+
+const DetailDiv = styled.div`
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-around;
+`
+
+const SpaceDiv = styled.div`
+  margin-top: 5px;
+  margin-bottom: 5px;
+`
+
+const OfficialLinkDiv = styled(SpaceDiv)`
+  margin-top: 10px;
+  margin-bottom: 10px; 
 `
 
 export { 
@@ -47,5 +67,8 @@ export {
   GetDirection,
   BreweryBox,
   Megah1,
-  Megah3
+  Megah3,
+  DetailDiv,
+  SpaceDiv,
+  OfficialLinkDiv
 }

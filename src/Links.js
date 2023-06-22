@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { AppContext } from './App';
 
 export default function Links() {
@@ -20,6 +21,8 @@ export default function Links() {
         <Link className='navigation-link' to='/micro-breweries'>Micro Breweries</Link>
         <Link className='navigation-link' to='/large-breweries'>Large Breweries</Link>
         <Link className='navigation-link' to='/brewpub'>Brew Pubs</Link>
+        <input className='search-input' placeholder='Search...' onChange={(e)=>{setSearchQuery(e.target.value)}}/>
+        <button className='search-button'>Search</button>
       </div>
       <div className='search-container'>
         {/* <button className='open-form-button' onClick={() => {openForm()}}>Filtered Search</button>
@@ -32,9 +35,6 @@ export default function Links() {
           <input type='text' id='searchBox' placeholder='Search...'/>
           <input type='button' id='searchButton' value='Search'/>
         </form> */}
-        <input className='search-input' placeholder='Search...' onChange={(e)=>{setSearchQuery(e.target.value)}}/>
-        <button className='search-button'>Search</Button>
-
       </div>
     </>
   )

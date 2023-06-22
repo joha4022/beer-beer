@@ -27,11 +27,11 @@ export default function App() {
       brewery,
       setBrewery,
       searchQuery,
-      setSerachQuery
+      setSearchQuery
       } }>
       <Router >
         <div className='main'>
-          <a className='title' href='http://localhost:3000/'><h1>Beer Beer</h1><img className='title-img' src='./images/beer.png'></img></a>
+          <a className='title' href='http://localhost:3000/'><h1 className='beer-beer'>Beer Beer</h1><img className='title-img' src='./images/beer.png'></img></a>
           <div className='link-bar'>
             <Links />
           </div>

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "./App";
-import { Category, BreweryBox } from "./Styled";
+import { Category, BreweryBox, SpaceDiv } from "./Styled";
 import { useNavigate } from "react-router-dom";
 
 export default function BrewPubs() {
@@ -26,18 +26,18 @@ export default function BrewPubs() {
                 setBrewery(b);
                 }}>
                 <h3>{b.name}</h3>
-                <div>
+                <SpaceDiv>
                   <Category>Address</Category>
                   <span>{b.street}, {b.city}, {b.state_province} {b.postal_code}</span>
-                </div>
-                <div>
+                </SpaceDiv>
+                <SpaceDiv>
                   <Category>Phone Number</Category>
                   <span>{b.phone}</span>
-                </div>
-                <div>
+                </SpaceDiv>
+                <SpaceDiv>
                   <Category>Brewery Type</Category>
                   {`${b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}` === 'Closed' ? <Category theme='red' boldness='normal'>{b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}</Category> : <span>{b.brewery_type.charAt(0).toUpperCase() + b.brewery_type.slice(1)}</span>}
-                </div>
+                </SpaceDiv>
               </BreweryBox>
             )
           })}

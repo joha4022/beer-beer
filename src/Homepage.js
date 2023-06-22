@@ -2,9 +2,10 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from './App';
 import { Megah1, Megah3 } from './Styled';
+import Loading from './Loading';
 
 export default function Homepage() {
-  const { breweryList, setBreweryList, currentLoc, setCurrentLoc } = useContext(AppContext);
+  const { currentLoc, setCurrentLoc } = useContext(AppContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +28,9 @@ export default function Homepage() {
       <Megah3>Welcome to Beer Beer!</Megah3>
       <button onClick={() => {
         navigate('/local-breweries');
-      }}>Find your local breweries</button>
+      }}>Discover your local breweries</button>
     </div>
-  );
+  ) 
+  return(<Loading />)
+  ;
 }

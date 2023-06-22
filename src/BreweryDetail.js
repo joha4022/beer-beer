@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "./App";
-import { Category, OfficialLink, GetDirection } from "./Styled";
+import { Category, OfficialLink, GetDirection, DetailDiv, SpaceDiv, OfficialLinkDiv } from "./Styled";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 
@@ -14,28 +14,28 @@ export default function BreweryDetail() {
   const address = `${brewery.street}, ${brewery.city}, ${brewery.state_province} ${brewery.postal_code}`;
   
   if(isLoaded) return (
-    <>
+    <DetailDiv>
       <div>
         <h3>{brewery.name}</h3>
-        <div>
+        <SpaceDiv>
           <Category>Address</Category>
           <span>{address}</span>
-        </div>
-        <div>
+        </SpaceDiv>
+        <SpaceDiv>
           <Category>Country</Category>
           <span>{brewery.country}</span>
-        </div>
-        <div>
+        </SpaceDiv>
+        <SpaceDiv>
           <Category>Phone Number</Category>
           <span>{brewery.phone}</span>
-        </div>
-        <div>
+        </SpaceDiv>
+        <SpaceDiv>
           <Category>Brewery Type</Category>
           {`${brewery.brewery_type.charAt(0).toUpperCase() + brewery.brewery_type.slice(1)}` === 'Closed' ? <Category theme='red' boldness='normal'>{brewery.brewery_type.charAt(0).toUpperCase() + brewery.brewery_type.slice(1)}</Category> : <span>{brewery.brewery_type.charAt(0).toUpperCase() + brewery.brewery_type.slice(1)}</span>}
-        </div>
-        <div>
+        </SpaceDiv>
+        <OfficialLinkDiv>
           <OfficialLink href={brewery.website_url} target="_blank">{brewery.name} Official Website</OfficialLink>
-        </div>
+        </OfficialLinkDiv>
         <div>
           <GetDirection onClick={() => {window.open(`https://maps.google.com?q=${brewery.name}`)}}>Get Directions</GetDirection>
         </div>
@@ -43,7 +43,7 @@ export default function BreweryDetail() {
       <div id='map'>
           <Map />
       </div>
-    </>
+    </DetailDiv>
   );
 }
 
