@@ -2,10 +2,11 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from './App';
 import { Megah1, Megah3, DiscoverButton } from './Styled';
+import Loading from './Loading';
 
 export default function Homepage() {
   const ApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-  const { setCurrentLoc } = useContext(AppContext);
+  const { setCurrentLoc, currentLoc } = useContext(AppContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,16 +27,20 @@ export default function Homepage() {
     }
   }, [])
 
-  return (
-    <>
-      <div className='homepage'>
-        <Megah1>Looking for breweries?</Megah1>
-        <Megah3>Welcome to Beer Beer!</Megah3>
-        <DiscoverButton onClick={() => {
-          navigate('/local-breweries/1');
-        }}>Discover your local breweries</DiscoverButton>
-      </div>
-    </>
-  )
+  if (currentLoc.city) {
+    return (
+      <>
+        <div className='homepage'>
+          <Megah1>Looking for breweries?</Megah1>
+          <Megah3>Welcome to Beer Beer!</Megah3>
+          <DiscoverButton onClick={() => {
+            navigate('/local-breweries/1');
+          }}>Discover your local breweries</DiscoverButton>
+        </div>
+      </>
+    )
+  } else {
+    return(<Loading />)
+  }
 
 }
