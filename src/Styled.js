@@ -24,7 +24,18 @@ const GetDirection = styled(OfficialLink)`
 
 const BreweryBox = styled.div`
   background: #f6c48e;
-  width: 35vw;
+  width: 40vw;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    opacity: 80%;
+  }
+`
+const LocalBreweryBox = styled(BreweryBox)`
+  background: #f6c48e;
+  width: 40vw;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
@@ -61,14 +72,41 @@ const OfficialLinkDiv = styled(SpaceDiv)`
   margin-bottom: 10px; 
 `
 
-export { 
-  Category, 
+const DiscoverButton = styled.button`
+  border: none;
+  font-family: CooperHewittBold;
+  font-size: 15px;
+  background: #EC9d00;
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    opacity: 80%;
+  }
+`
+
+const PageNumber = styled.span`
+  color: ${props => props.theme === 'active' ? '#ec9d00' : 'black'};
+  margin-left: 10px;
+  margin-right: 10px;
+  &:hover {
+    cursor: pointer;
+    opacity: 80%;
+  }
+`
+// i/20+1 === currentPage ? 'active': ''
+export {
+  Category,
   OfficialLink,
   GetDirection,
   BreweryBox,
+  LocalBreweryBox,
   Megah1,
   Megah3,
   DetailDiv,
   SpaceDiv,
-  OfficialLinkDiv
+  OfficialLinkDiv,
+  DiscoverButton,
+  PageNumber
 }

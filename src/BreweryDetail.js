@@ -5,8 +5,9 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 
 export default function BreweryDetail() {
-  const ApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { brewery } = useContext(AppContext);
+
+  const ApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: ApiKey
   });
@@ -69,5 +70,4 @@ const Map = () => {
       </GoogleMap>
     )
   }
-
 }

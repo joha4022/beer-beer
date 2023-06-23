@@ -19,7 +19,7 @@ body {
 
 .navigation-link {
   text-decoration: none;
-  margin-right: 10px;
+  margin-right: 50px;
   color: black;
   font-size: 1rem;
 }
@@ -60,10 +60,6 @@ body {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
 }
 
-.search-form {
-  display: none;
-}
-
 .homepage {
   margin: 10px;
   display: flex;
@@ -81,4 +77,86 @@ body {
 
 .brewingh2 {
   text-align: center;
+}
+
+.search-input {
+  margin-left: 20px;
+  height: 25px;
+  border: none;
+  font-family: cooperHewittBold;
+}
+
+.search-input:hover {
+  background: lightgray;
+  border-radius: 5px;
+}
+
+.search-button {
+  margin-left: 10px;
+  height: 25px;
+  border: none;
+  color: white;
+  font-family: cooperHewittBold;
+  background: #EC9d00;
+  border-radius: 5px;
+  }
+
+.search-button:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.search-button:active {
+  background: #ec8600;
+}
+
+.results-box {
+  margin-left: 10px;
+  font-size: 15px;
+  opacity: 50%;
+}
+
+.current-city {
+  margin-left: 50px;
+  opacity: 50%;
+  position: absolute;
+  top: 10%;
+}
+
+.page-box {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+
+}
+
+.brewery-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.result-map-box {
+  display: flex;
+  justify-content: center;
+}
+
+.local-breweries-map {
+  margin-top: 10px;
+  height: min-content;
+  right: 9vw;
+  position: fixed;
+}
+
+.map-container-local {
+  width: 40vw;
+  height: 40vw;
+  border-radius: 5px;
+}
+
+.spacer {
+  width: 40vw;
+  height: 40vw;
+  margin: 10px;
+  color: white;
 }
