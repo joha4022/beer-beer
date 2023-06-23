@@ -56,6 +56,11 @@ export default function App() {
           <Route path='/local-breweries/:id' element={<LocalBreweries />} />
           <Route path='/brewery/:id' element={<BreweryDetail />} />
         </Routes>
+        <footer>
+          <h5>Beer Beer</h5>
+          <p><i>Beer Beer is a single page application project using Open Brewery DB, developed June 2023.</i></p>
+          <a id="githubBox" href="https://github.com/joha4022/beer-beer" target="_blank"><img id="githubIcon" src="../images/25231.png"></img></a>
+        </footer>
       </Router>
     </AppContext.Provider>
   );

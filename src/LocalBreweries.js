@@ -31,7 +31,7 @@ export default function LocalBreweries() {
           setCurrentList(data.slice(0, 20));
         })
     }
-  }, [])
+  }, [currentLoc])
 
   const pageHandler = (page) => {
     setCurrentPage(page);
@@ -42,7 +42,7 @@ export default function LocalBreweries() {
   if (currentList && isLoaded) {
     return (
       <>
-        <div className="results-box">Results: {breweryList.length} breweries</div>
+        <div className="results-box">{breweryList.length === 1 ? `Found ${breweryList.length} brewery` : `Found ${breweryList.length} breweries`}</div>
         <div className="page-box">
           {breweryList.map((e, i) => {
             if (i % 20 === 0) {

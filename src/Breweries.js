@@ -17,7 +17,7 @@ export default function Breweries() {
   if (searchResult) {
     return (
       <>
-        <div className="results-box">Results: {searchResult.length} breweries</div>
+        <div className="results-box">{searchResult.length === 1 ? `Found ${searchResult.length} brewery` : `Found ${searchResult.length} breweries`}</div>
         <div className="page-box">
           {searchResult.map((e, i) => {
             if (i % 20 === 0) {

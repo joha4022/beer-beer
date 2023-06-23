@@ -88,8 +88,7 @@ const DiscoverButton = styled.button`
 
 const PageNumber = styled.span`
   color: ${props => props.theme === 'active' ? '#ec9d00' : 'black'};
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 30px;
   &:hover {
     cursor: pointer;
     opacity: 80%;

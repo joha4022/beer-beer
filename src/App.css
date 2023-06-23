@@ -144,13 +144,14 @@ body {
 .local-breweries-map {
   margin-top: 10px;
   height: min-content;
-  right: 9vw;
+  right: 16vw;
+  bottom: 6vw;
   position: fixed;
 }
 
 .map-container-local {
-  width: 40vw;
-  height: 40vw;
+  width: 33vw;
+  height: 33vw;
   border-radius: 5px;
 }
 
@@ -159,4 +160,38 @@ body {
   height: 40vw;
   margin: 10px;
   color: white;
+}
+
+#githubIcon {
+  height: 20px;
+  align-self: center;
+  margin-left: 50px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  align-self: center;
+  margin: auto;
+  left: 5%;
+  right: 5%;
+  opacity: 70%;
+}
+
+h5 {
+  text-align: center;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 15px;
+}
+
+p {
+  text-align: center;
+  height:min-content;
+  margin: 0px;
 }
