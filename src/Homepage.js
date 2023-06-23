@@ -10,21 +10,25 @@ export default function Homepage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${ApiKey}`)
-          .then(res => res.json())
-          .then(data => {
-            let locationArray = data.plus_code.compound_code.split(' ')
-            setCurrentLoc({
-              city: `${locationArray[1].replace(/.$/, '')}`,
-              country: `${locationArray[locationArray.length - 1]}`,
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            });
-          })
-      })
-    }
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${ApiKey}`)
+            .then(res => res.json())
+            .then(data => {
+              let locationArray = data.plus_code.compound_code.split(' ')
+              setCurrentLoc({
+                city: `${locationArray[1].replace(/.$/, '')}`,
+                country: `${locationArray[locationArray.length - 1]}`,
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              });
+              sessionStorage.setItem('currentCity', `${locationArray[1].replace(/.$/, '')}`);
+              sessionStorage.setItem('currentCountry', `${locationArray[locationArray.length - 1]}`);
+              sessionStorage.setItem('currentLat', position.coords.latitude);
+              sessionStorage.setItem('currentLng', position.coords.longitude);
+            })
+        })
+      }
   }, [])
 
   if (currentLoc.city) {

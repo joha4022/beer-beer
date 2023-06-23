@@ -6,7 +6,7 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import Loading from "./Loading";
 
 export default function LocalBreweries() {
-  const { currentLoc, breweryList, setBrewery, setCurrentPage, currentList, setCurrentList, setBreweryList, currentPage } = useContext(AppContext);
+  const { currentLoc, breweryList, setBrewery, setCurrentPage, currentList, setCurrentList, setBreweryList, setCurrentLoc } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,6 +14,11 @@ export default function LocalBreweries() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: ApiKey
   });
+
+  // let currentCity = sessionStorage.getItem('currentCity');
+  // let currentCountry = sessionStorage.getItem('currentCountry');
+  // let currentLat = sessionStorage.getItem('currentLat');
+  // let currentLng = sessionStorage.getItem('currentLng');
 
   useEffect(() => {
     if (currentLoc) {
@@ -46,7 +51,7 @@ export default function LocalBreweries() {
         <div className="page-box">
           {breweryList.map((e, i) => {
             if (i % 20 === 0) {
-              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i/20+1 ? 'active': ''} key={i} id={i / 20 + 1} onClick={(event) => {
+              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i / 20 + 1 ? 'active' : ''} key={i} id={i / 20 + 1} onClick={(event) => {
                 pageHandler(event.target.id);
                 navigate(`/local-breweries/${event.target.id}`);
               }}>{i / 20 + 1}</PageNumber>)
@@ -79,7 +84,7 @@ export default function LocalBreweries() {
             })}
           </div>
           <div className="spacer">
-          spacer
+            spacer
           </div>
           <div className="local-breweries-map">
             <Map />
@@ -88,7 +93,7 @@ export default function LocalBreweries() {
         <div className="page-box">
           {breweryList.map((e, i) => {
             if (i % 20 === 0) {
-              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i/20+1 ? 'active': ''}  key={i} id={i / 20 + 1} onClick={(event) => {
+              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i / 20 + 1 ? 'active' : ''} key={i} id={i / 20 + 1} onClick={(event) => {
                 window.scrollTo(0, 0);
                 pageHandler(event.target.id);
                 navigate(`/local-breweries/${event.target.id}`);
