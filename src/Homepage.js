@@ -14,7 +14,6 @@ export default function Homepage() {
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' })
     .then(status => {
-      console.log(status.state)
       if (status.state === 'granted') {
         setGeolocStatus('granted');
       } else {

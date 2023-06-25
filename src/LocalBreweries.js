@@ -16,14 +16,19 @@ export default function LocalBreweries() {
   });
 
   useEffect(() => {
-    if(sessionStorage.getItem('currentLoc') === null) {
+    if(sessionStorage.getItem('currentLoc') !== null) {
+      setCurrentLoc(JSON.parse(sessionStorage.getItem('currentLoc')));
+    }
+    if(sessionStorage.getItem('currentLoc') === null && sessionStorage.getItem('currentList') === null) {
       fetch(`https://api.openbrewerydb.org/v1/breweries?per_page=200`)
         .then(res => res.json())
         .then(data => {
           setBreweryList(data);
           setCurrentList(data.slice(0, 20));
+          sessionStorage.setItem('breweryList', JSON.stringify(data));
+          sessionStorage.setItem('currentList', JSON.stringify(data.slice(0, 20)));
         })
-    } else {
+    } else if(sessionStorage.getItem('currentLoc') !== null && sessionStorage.getItem('currentList') === null){
       let currentLocation = JSON.parse(sessionStorage.getItem('currentLoc'));
       setCurrentLoc({
         city: `${currentLocation.city}`,
@@ -36,14 +41,19 @@ export default function LocalBreweries() {
         .then(data => {
           setBreweryList(data);
           setCurrentList(data.slice(0, 20));
+          sessionStorage.setItem('breweryList', JSON.stringify(data));
+          sessionStorage.setItem('currentList', JSON.stringify(data.slice(0, 20)));
         })
+    } else if(sessionStorage.getItem('currentList') !== null) {
+      setBreweryList(JSON.parse(sessionStorage.getItem('breweryList')));
+      setCurrentList(JSON.parse(sessionStorage.getItem('currentList')));
     }
   }, [])
 
   const pageHandler = (page) => {
     setCurrentPage(page);
     setCurrentList(breweryList.slice((page - 1) * 20, ((page - 1) * 20) + 20));
-    sessionStorage.setItem('breweryList', JSON.stringify(breweryList.slice((page - 1) * 20, ((page - 1) * 20) + 20)));
+    sessionStorage.setItem('currentList', JSON.stringify(breweryList.slice((page - 1) * 20, ((page - 1) * 20) + 20)));
     console.log(page, (page - 1) * 20, ((page - 1) * 20) + 20);
   }
 

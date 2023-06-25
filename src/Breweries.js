@@ -4,7 +4,7 @@ import { Category, BreweryBox, SpaceDiv, PageNumber, PageNumberBottom } from "./
 import { useNavigate,useLocation } from "react-router-dom";
 
 export default function Breweries() {
-  const { setBrewery, setCurrentPage, searchResult, setSearchResultList, searchResultList, setSearchResult } = useContext(AppContext);
+  const { setBrewery, setCurrentPage, searchResult, setSearchResultList, searchResultList, setSearchResult, setCurrentLoc } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,6 +16,9 @@ export default function Breweries() {
   }
 
   useEffect(()=> {
+    if(sessionStorage.getItem('currentLoc') !== null) {
+      setCurrentLoc(JSON.parse(sessionStorage.getItem('currentLoc')));
+    }
     if(sessionStorage.getItem('searchResult') !== null) {
       setSearchResult(JSON.parse(sessionStorage.getItem('searchResult')));
       setSearchResultList(JSON.parse(sessionStorage.getItem('searchResultList')));
