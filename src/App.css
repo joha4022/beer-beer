@@ -175,9 +175,9 @@ footer {
   bottom: 0;
   align-self: center;
   margin: auto;
-  left: 5%;
-  right: 5%;
-  opacity: 70%;
+  width: 100%;
+  padding-top: 10px;
+  background:lightseagreen;
 }
 
 h5 {

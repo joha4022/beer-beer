@@ -1,18 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./App";
-import { Category, BreweryBox, SpaceDiv, PageNumber } from "./Styled";
+import { Category, BreweryBox, SpaceDiv, PageNumber, PageNumberBottom } from "./Styled";
 import { useNavigate,useLocation } from "react-router-dom";
 
 export default function Breweries() {
-  const { setBrewery, setCurrentPage, searchResult, setSearchResultList, searchResultList } = useContext(AppContext);
+  const { setBrewery, setCurrentPage, searchResult, setSearchResultList, searchResultList, setSearchResult } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const pageHandler = (page) => {
     setCurrentPage(page);
     setSearchResultList(searchResult.slice((page - 1) * 20, ((page - 1) * 20) + 20));
+    sessionStorage.setItem('searchResultList', JSON.stringify(searchResult.slice((page - 1) * 20, ((page - 1) * 20) + 20)));
     console.log(page, (page - 1) * 20, ((page - 1) * 20) + 20);
   }
+
+  useEffect(()=> {
+    if(sessionStorage.getItem('searchResult') !== null) {
+      setSearchResult(JSON.parse(sessionStorage.getItem('searchResult')));
+      setSearchResultList(JSON.parse(sessionStorage.getItem('searchResultList')));
+    }
+  }, [])
 
   if (searchResult) {
     return (
@@ -34,6 +42,7 @@ export default function Breweries() {
               <BreweryBox key={i} className='brewery' onClick={() => {
                 navigate(`/brewery/${b.id}`);
                 setBrewery(b);
+                sessionStorage.setItem('brewery', JSON.stringify(b));
               }}>
                 <h3>{b.name}</h3>
                 <SpaceDiv>
@@ -55,11 +64,11 @@ export default function Breweries() {
         <div className="page-box">
           {searchResult.map((e, i) => {
             if (i % 20 === 0) {
-              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i/20+1 ? 'active': ''}   key={i} id={i/20+1} onClick={(event) => {
+              return (<PageNumberBottom theme={Number(location.pathname.split('/')[2]) === i/20+1 ? 'active': ''}   key={i} id={i/20+1} onClick={(event) => {
                 window.scrollTo(0,0);
                 pageHandler(event.target.id);
                 navigate(`/breweries/${event.target.id}`);
-              }}>{i/20+1}</PageNumber>)
+              }}>{i/20+1}</PageNumberBottom>)
             }
           })}
         </div>

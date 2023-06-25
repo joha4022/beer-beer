@@ -89,12 +89,16 @@ const DiscoverButton = styled.button`
 const PageNumber = styled.span`
   color: ${props => props.theme === 'active' ? '#ec9d00' : 'black'};
   margin: 30px;
+  margin-bottom: 10px;
   &:hover {
     cursor: pointer;
     opacity: 80%;
   }
 `
-// i/20+1 === currentPage ? 'active': ''
+const PageNumberBottom = styled(PageNumber)`
+  margin-bottom: 50px;
+  margin-top: 10px;
+`
 export {
   Category,
   OfficialLink,
@@ -107,5 +111,6 @@ export {
   SpaceDiv,
   OfficialLinkDiv,
   DiscoverButton,
-  PageNumber
+  PageNumber,
+  PageNumberBottom
 }

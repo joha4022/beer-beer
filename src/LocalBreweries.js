@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "./App";
-import { Category, BreweryBox, SpaceDiv, PageNumber, LocalBreweryBox } from "./Styled";
+import { Category, PageNumberBottom, SpaceDiv, PageNumber, LocalBreweryBox } from "./Styled";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import Loading from "./Loading";
 
 export default function LocalBreweries() {
-  const { currentLoc, breweryList, setBrewery, setCurrentPage, currentList, setCurrentList, setBreweryList, setCurrentLoc } = useContext(AppContext);
+  const { breweryList, setBrewery, setCurrentPage, currentList, setCurrentList, setBreweryList, setCurrentLoc } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,32 +15,35 @@ export default function LocalBreweries() {
     googleMapsApiKey: ApiKey
   });
 
-  // let currentCity = sessionStorage.getItem('currentCity');
-  // let currentCountry = sessionStorage.getItem('currentCountry');
-  // let currentLat = sessionStorage.getItem('currentLat');
-  // let currentLng = sessionStorage.getItem('currentLng');
-
   useEffect(() => {
-    if (currentLoc) {
-      fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${currentLoc.city}&per_page=200`)
-        .then(res => res.json())
-        .then(data => {
-          setBreweryList(data);
-          setCurrentList(data.slice(0, 20));
-        })
-    } else {
+    if(sessionStorage.getItem('currentLoc') === null) {
       fetch(`https://api.openbrewerydb.org/v1/breweries?per_page=200`)
         .then(res => res.json())
         .then(data => {
           setBreweryList(data);
           setCurrentList(data.slice(0, 20));
         })
+    } else {
+      let currentLocation = JSON.parse(sessionStorage.getItem('currentLoc'));
+      setCurrentLoc({
+        city: `${currentLocation.city}`,
+        country: `${currentLocation.country}`,
+        lat: currentLocation.lat,
+        lng: currentLocation.lng
+      });
+      fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${currentLocation.city}&per_page=200`)
+        .then(res => res.json())
+        .then(data => {
+          setBreweryList(data);
+          setCurrentList(data.slice(0, 20));
+        })
     }
-  }, [currentLoc])
+  }, [])
 
   const pageHandler = (page) => {
     setCurrentPage(page);
     setCurrentList(breweryList.slice((page - 1) * 20, ((page - 1) * 20) + 20));
+    sessionStorage.setItem('breweryList', JSON.stringify(breweryList.slice((page - 1) * 20, ((page - 1) * 20) + 20)));
     console.log(page, (page - 1) * 20, ((page - 1) * 20) + 20);
   }
 
@@ -65,6 +68,7 @@ export default function LocalBreweries() {
                 <LocalBreweryBox key={i} className='brewery' onClick={() => {
                   navigate(`/brewery/${b.id}`);
                   setBrewery(b);
+                  sessionStorage.setItem('brewery', JSON.stringify(b));
                 }}>
                   <h3>{b.name}</h3>
                   <SpaceDiv>
@@ -93,11 +97,11 @@ export default function LocalBreweries() {
         <div className="page-box">
           {breweryList.map((e, i) => {
             if (i % 20 === 0) {
-              return (<PageNumber theme={Number(location.pathname.split('/')[2]) === i / 20 + 1 ? 'active' : ''} key={i} id={i / 20 + 1} onClick={(event) => {
+              return (<PageNumberBottom theme={Number(location.pathname.split('/')[2]) === i / 20 + 1 ? 'active' : ''} key={i} id={i / 20 + 1} onClick={(event) => {
                 window.scrollTo(0, 0);
                 pageHandler(event.target.id);
                 navigate(`/local-breweries/${event.target.id}`);
-              }}>{i / 20 + 1}</PageNumber>)
+              }}>{i / 20 + 1}</PageNumberBottom>)
             }
           })}
         </div>
@@ -126,6 +130,7 @@ const Map = () => {
       {currentList.map((e, i) => {
         return (
           <Marker
+            key={i}
             position={{ lat: Number(e.latitude), lng: Number(e.longitude) }}
             title={e.name}
             label={{ text: e.name, color: 'darkred', className: 'marker-label' }}
